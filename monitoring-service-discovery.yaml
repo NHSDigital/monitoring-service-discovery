@@ -1,0 +1,9 @@
+openapi: "3.0.0"
+x-nhsd-api-platform:
+  meta:
+    name: Monitoring Service Discovery
+    canonical_name: monitoring-service-discovery
+    short_name: msd
+    description: A service discovery for populating blackbox-exporter endpoints
+    pipeline_name_prefix: Monitoring-SD
+  base_path: "/monitoring-sd"
