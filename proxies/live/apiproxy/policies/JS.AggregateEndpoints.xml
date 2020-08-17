@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="JsAggregateEndpoints">
-  <DisplayName>JsAggregateEndpoints</DisplayName>
+<Javascript async="false" continueOnError="false" enabled="true" timeLimit="200" name="JS.AggregateEndpoints">
+  <DisplayName>JS.AggregateEndpoints</DisplayName>
   <Properties/>
   <ResourceURL>jsc://aggregate-endpoints.js</ResourceURL>
 </Javascript>
