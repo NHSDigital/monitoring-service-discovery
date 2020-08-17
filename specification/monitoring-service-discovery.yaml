@@ -7,3 +7,45 @@ x-nhsd-api-platform:
     description: A service discovery for populating blackbox-exporter endpoints
     pipeline_name_prefix: Monitoring-SD
   base_path: "/monitoring-sd"
+  
+info:
+  version: "0.0.1"
+  title: Hello World API
+  description: |
+    ## Overview
+    Use this API alongside our [tutorials](https://digital.nhs.uk/developer/tutorials).
+  contact:
+    name: API Management Support
+    email: api.management@nhs.net
+    
+servers:
+  - url: 'https://sandbox.api.service.nhs.uk/hello-world-master'
+    description: Sandbox environment.
+    
+paths:
+  /service:
+    get:
+      summary: Returns list of endpoints to monitor
+      operationId: getServices
+      description: |
+        Returns a list of endpoints to monitor
+
+        Prometheus calls this endpoint periodically to get a list of endpoints.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Hello world!"
+              example:
+                message: "Hello world!"
+      tags:
+        - monitoring
+
+tags:
+  - name: monitoring
