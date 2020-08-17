@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="KVM.StoreServiceEntries" mapIdentifier="monitoring-sd-service">
+  <DisplayName>KVM.StoreServiceEntries</DisplayName>
+  <ExclusiveCache>false</ExclusiveCache>
+  <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
+  <Put override="true">
+    <Key>
+      <Parameter>entries</Parameter>
+    </Key>
+    <Value ref="service.entries"/>
+  </Put>
+  <Scope>environment</Scope>
+</KeyValueMapOperations>
