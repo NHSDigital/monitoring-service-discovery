@@ -7,7 +7,6 @@ install-python:
 
 install-node:
 	npm install
-	cd sandbox && npm install
 
 install-hooks:
 	cp scripts/pre-commit .git/hooks/pre-commit
@@ -33,9 +32,6 @@ check-licenses:
 
 format:
 	poetry run black **/*.py
-
-sandbox: update-examples
-	cd sandbox && npm run start
 
 build-proxy:
 	scripts/build_proxy.sh
