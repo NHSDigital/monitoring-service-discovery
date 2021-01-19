@@ -56,6 +56,24 @@
         <Response/>
         <Condition>(proxy.pathsuffix MatchesPath "/service") and (request.verb = "POST")</Condition>
       </Flow>
+      <Flow name="DELETE service monitoring endpoints">
+        <Request>
+          <Step>
+            <Name>VerifyApiKey</Name>
+          </Step>
+          <Step>
+            <Name>KVM.RetrieveServiceEntries</Name>
+          </Step>
+          <Step>
+            <Name>JS.DeleteServiceEntries</Name>
+          </Step>
+          <Step>
+            <Name>KVM.StoreServiceEntries</Name>
+          </Step>
+        </Request>
+        <Response/>
+        <Condition>(proxy.pathsuffix MatchesPath "/service") and (request.verb = "DELETE")</Condition>
+      </Flow>
     </Flows>
     <PreFlow/>
     <HTTPProxyConnection>
