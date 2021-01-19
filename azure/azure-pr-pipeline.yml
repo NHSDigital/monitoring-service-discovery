@@ -1,55 +1,41 @@
 name: "$(SourceBranchName)+$(BuildID)"
 
-# Prevents building every commit or on PR
 trigger: none
 pr: none
 
-# Consume an artifact from the build pipeline as soon as it becomes available.
 resources:
-  pipelines:
-    - pipeline: monitoring-service-discovery
-      source: "Monitoring-SD-Build"
-      trigger:
-        branches:
-          exclude:
-            - 'master'
-            - "refs/heads/master"
-            - 'refs/tags/v*'
-  repositories:
-    - repository: templates
-      type: github
-      name: NHSDigital/api-management-utils
-      ref: refs/heads/edge
-      endpoint: NHSDigital
+    repositories:
+        - repository: common
+          type: github
+          name: NHSDigital/api-management-utils
+          ref: refs/heads/edge
+          endpoint: NHSDigital
 
-# env variables
-variables:
-  SERVICE_NAME: monitoring-service-discovery
-  SERVICE_BASE_PATH: /monitoring-sd
-  PRODUCT_DISPLAY_NAME: Monitoring Service Discovery
-  PRODUCT_DESCRIPTION: A service discovery for populating blackbox-exporter endpoints
-  AWS_ENV: ptl
-  FORCE_SANDBOX: false
-  NAMESPACE: from_branchname
-  PROXY_NAME: live
+    pipelines:
+        - pipeline: build_pipeline
+          source: "Monitoring-Service-Discovery-Build"
+          trigger:
+              branches:
+                  exclude:
+                      - master
+                      - refs/heads/master
+                      - refs/tags/v*
 
 pool:
-  vmImage: 'ubuntu-latest'
+    name: 'AWS-ECS'
 
-stages:
-  - stage: DeployInternalDev
-    displayName: internal-dev
-    variables:
-    - group: apigee-nonprod
-    - group: env-internal-dev
-    jobs:
-      - deployment: DeployService
-        displayName: Deploy Service
-        environment: 'internal-dev'
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - template: az/templates/pre-tasks.yml@templates
-                - template: az/templates/setup-build-name.yml@templates
-                - template: az/templates/deploy-namespaced-service.yml@templates
+variables:
+    - template: project.yml
+
+extends:
+    template: azure/common/apigee-deployment.yml@common
+    parameters:
+        service_name: ${{ variables.service_name }}
+        service_base_path: ${{ variables.service_base_path }}
+        short_service_name: ${{ variables.short_service_name }}
+        product_display_name: ${{ variables.product_display_name }}
+        product_description: ${{ variables.product_description }}
+        spec_file: ${{ variables.spec_file }}
+        apigee_deployments:
+            - environment: internal-dev
+              make_spec_visible: false
