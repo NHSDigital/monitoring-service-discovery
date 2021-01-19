@@ -17,7 +17,7 @@ resources:
     - repository: templates
       type: github
       name: NHSDigital/api-management-utils
-      ref: 'refs/heads/APM-00-AMB-229-add-monitoring-endpoints-to-pipeline-3'
+      ref: refs/heads/edge
       endpoint: NHSDigital
 
 # env variables

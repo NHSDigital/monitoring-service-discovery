@@ -19,6 +19,7 @@ resources:
     - repository: templates
       type: github
       name: NHSDigital/api-management-utils
+      ref: refs/heads/edge
       endpoint: NHSDigital
 
 # env variables
