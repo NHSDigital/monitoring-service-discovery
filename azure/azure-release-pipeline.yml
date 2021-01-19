@@ -14,9 +14,7 @@ resources:
     source: "Monitoring-Service-Discovery-Build"
     trigger:
       branches:
-        exclude:
-          - master
-          - refs/heads/master
+        include:
           - refs/tags/v*
 
 pool:
