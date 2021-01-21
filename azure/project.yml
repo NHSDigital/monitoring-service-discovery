@@ -1,7 +1,7 @@
 variables:
   service_name: monitoring-service-discovery
-  short_service_name: msd
-  service_base_path: monitoring-sd
+  service_base_path: monitoring-service-discovery
+  short_service_name: monitoring-sd
   product_display_name: Monitoring Service Discovery
-  product_description: Monitors all the things
-
+  product_description: Monitoring Service Discovery
+  spec_file: monitoring-service-discovery.json
