@@ -35,6 +35,6 @@ extends:
     apigee_deployments:
       - environment: internal-dev
       - environment: prod
-        depends on:
+        depends_on:
           - internal-dev
       
