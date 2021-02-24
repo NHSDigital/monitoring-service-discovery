@@ -36,5 +36,5 @@ extends:
       - environment: internal-dev
       - environment: prod
         depends_on:
-          - internal-dev
+          - internal_dev
       
