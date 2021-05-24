@@ -12,6 +12,7 @@ if (!entries[serviceName]) {
 } else {
   serviceEndpoints = entries[serviceName][env];
   endpointEntries = payload[serviceName][env];
+  endpoints = serviceEndpoints.concat(endpointEntries)
   // Remove duplicates
   endpoints = endpoints.filter((item, pos) => endpoints.indexOf(item) === pos)
   entries[serviceName][env] = endpoints
