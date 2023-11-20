@@ -29,10 +29,6 @@
           <Name>AssignMessage.DefineResponse</Name>
         </Step>
         <Step>
-          <Name>AssignMessage.DefineAPIName</Name>
-          <Condition>request.queryparam.apiName != null</Condition>
-        </Step>
-        <Step>
           <Name>JS.AggregateEndpoints</Name>
         </Step>
         <Step>
