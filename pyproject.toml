@@ -8,7 +8,7 @@ version = "0.0.1-alpha"
 description = "TODO"
 
 license = "MIT"
-
+package-mode = false
 authors = [
     #TODO add authors
 ]
