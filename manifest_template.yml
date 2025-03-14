@@ -1,0 +1,48 @@
+## Manifest template ##
+# To view the expanded version of this template locally, clone api-management-utils
+#
+#   $ cd /path/to/local/api-management-utils/ansible
+#   $ DIST_DIR=/path/to/this/repo make template-manifest
+#
+#
+APIGEE_ENVIRONMENTS:
+- display_name: Internal Development
+  name: internal-dev
+- approval_type: manual
+  display_name: Production
+  name: prod
+---
+meta:
+  api:
+    name: monitoring-service-discovery
+    guid: d85314fc-9951-491c-95b1-debd819c9f3f
+  schema_version: 1
+apigee:
+  environments:
+
+{% for ENV in APIGEE_ENVIRONMENTS %}
+{% set TITLE = 'Monitoring Service Discovery (' + ENV.display_name + ')' %}
+{% set DESCRIPTION = 'Monitoring Service Discovery - ' + ENV.display_name | lower + ' environment' %}
+{% set NAME = 'monitoring-service-discovery-' + ENV.name %}
+  - name: {{ ENV.name }}
+    products:
+      - name: {{ NAME }}
+        approvalType: {{ ENV.approval_type | default('auto') }}
+        attributes:
+          - name: access
+            value: public
+          - name: ratelimit
+            value: 5ps
+        description: {{ DESCRIPTION }}
+        displayName: {{ TITLE }}
+        environments: [ {{ ENV.name }} ]
+        proxies:
+          - monitoring-service-discovery-{{ ENV.name }}
+        scopes:
+          - 'urn:nhsd:apim:app:level3:monitoring-service-discovery'
+          - 'urn:nhsd:apim:user-nhs-id:aal3:monitoring-service-discovery'
+        quota: '300'
+        quotaInterval: '1'
+        quotaTimeUnit: minute
+    specs: []
+{% endfor %}
