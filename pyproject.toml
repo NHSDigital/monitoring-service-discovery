@@ -8,7 +8,7 @@ version = "0.0.1-alpha"
 description = "TODO"
 
 license = "MIT"
-
+package-mode = false
 authors = [
     #TODO add authors
 ]
@@ -16,7 +16,6 @@ authors = [
 readme = 'README.md'
 
 repository = "https://github.com/NHSDigital/monitoring-service-discovery-api"
-homepage = ""
 
 keywords = ["healthcare", "uk", "nhs"] #TODO add additional keywords
 

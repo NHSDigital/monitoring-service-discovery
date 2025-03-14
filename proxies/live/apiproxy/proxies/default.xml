@@ -1,66 +1,85 @@
 <ProxyEndpoint name="default">
-    <Flows>
-      <Flow name="OptionsPreFlight">
-            <Request/>
-            <Response>
-                <Step>
-                    <Name>AssignMessage.AddCors</Name>
-                </Step>
-            </Response>
-        <Condition>request.verb == "OPTIONS" AND request.header.origin != null AND request.header.Access-Control-Request-Method != null</Condition>
-      </Flow>
-      <Flow name="AddPayloadToPing">
-        <Description/>
-        <Request/>
-        <Response>
-          <Step>
-            <Name>AssignMessage.AddPayloadToPing</Name>
-          </Step>
-        </Response>
-        <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
-      </Flow>
+  <Flows>
+    <Flow name="OptionsPreFlight">
+      <Request />
+      <Response>
+        <Step>
+          <Name>AssignMessage.AddCors</Name>
+        </Step>
+      </Response>
+      <Condition>request.verb == "OPTIONS" AND request.header.origin != null AND request.header.Access-Control-Request-Method != null</Condition>
+    </Flow>
+    <Flow name="AddPayloadToPing">
+      <Description />
+      <Request />
+      <Response>
+        <Step>
+          <Name>AssignMessage.AddPayloadToPing</Name>
+        </Step>
+      </Response>
+      <Condition>(proxy.pathsuffix MatchesPath "/_ping") and ((request.verb = "GET") or (request.verb = "HEAD"))</Condition>
+    </Flow>
 
-      <Flow name="GET service list">
-        <Request>
-          <Step>
-            <Name>KVM.RetrieveServiceEntries</Name>
-          </Step>
-          <Step>
-            <Name>AssignMessage.DefineResponse</Name>
-          </Step>
-          <Step>
-            <Name>JS.AggregateEndpoints</Name>
-          </Step>
-          <Step>
-            <Name>AssignMessage.GetEndpoints</Name>
-          </Step>
-        </Request>
-        <Condition>request.verb == "GET"</Condition>
-      </Flow>
+    <Flow name="GET service list">
+      <Request>
+        <Step>
+          <Name>KVM.RetrieveServiceEntries</Name>
+        </Step>
+        <Step>
+          <Name>AssignMessage.DefineResponse</Name>
+        </Step>
+        <Step>
+          <Name>JS.AggregateEndpoints</Name>
+        </Step>
+        <Step>
+          <Name>AssignMessage.GetEndpoints</Name>
+        </Step>
+      </Request>
+      <Condition>request.verb == "GET"</Condition>
+    </Flow>
 
-      <Flow name="POST service monitoring endpoints">
-        <Request>
-          <Step>
-            <Name>VerifyApiKey</Name>
-          </Step>
-          <Step>
-            <Name>KVM.RetrieveServiceEntries</Name>
-          </Step>
-          <Step>
-            <Name>JS.UpdateServiceEntries</Name>
-          </Step>
-          <Step>
-            <Name>KVM.StoreServiceEntries</Name>
-          </Step>
-        </Request>
-        <Response/>
-        <Condition>(proxy.pathsuffix MatchesPath "/service") and (request.verb = "POST")</Condition>
-      </Flow>
-    </Flows>
-    <PreFlow/>
-    <HTTPProxyConnection>
-        <BasePath>{{ SERVICE_BASE_PATH }}</BasePath>
-        <VirtualHost>secure</VirtualHost>
-    </HTTPProxyConnection>
-  <RouteRule name="noroute"/>
+    <Flow name="POST service monitoring endpoints">
+      <Request>
+        <Step>
+          <Name>VerifyApiKey</Name>
+        </Step>
+        <Step>
+          <Name>KVM.RetrieveServiceEntries</Name>
+        </Step>
+        <Step>
+          <Name>JS.UpdateServiceEntries</Name>
+        </Step>
+        <Step>
+          <Name>KVM.StoreServiceEntries</Name>
+        </Step>
+      </Request>
+      <Response />
+      <Condition>(proxy.pathsuffix MatchesPath "/service") and (request.verb = "POST")</Condition>
+    </Flow>
+
+    <Flow name="DELETE service monitoring endpoints">
+      <Request>
+        <Step>
+          <Name>VerifyApiKey</Name>
+        </Step>
+        <Step>
+          <Name>KVM.RetrieveServiceEntries</Name>
+        </Step>
+        <Step>
+          <Name>JS.DeleteServiceEntries</Name>
+        </Step>
+        <Step>
+          <Name>KVM.StoreServiceEntries</Name>
+        </Step>
+      </Request>
+      <Response />
+      <Condition>(proxy.pathsuffix MatchesPath "/service") and (request.verb = "DELETE")</Condition>
+    </Flow>
+  </Flows>
+  <PreFlow />
+  <HTTPProxyConnection>
+    <BasePath>{{ SERVICE_BASE_PATH }}</BasePath>
+    <VirtualHost>secure</VirtualHost>
+  </HTTPProxyConnection>
+  <RouteRule name="noroute" />
 </ProxyEndpoint>
