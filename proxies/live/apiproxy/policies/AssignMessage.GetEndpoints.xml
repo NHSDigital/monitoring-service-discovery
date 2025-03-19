@@ -3,7 +3,7 @@
   <DisplayName>AssignMessage.GetEndpoints</DisplayName>
   <Properties/>
   <Set>
-    <Payload>{aggregatedEndpoints}</Payload>
+    <Payload contentType="application/json">{aggregatedEndpoints}</Payload>
   </Set>
   <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
   <AssignTo createNew="false" transport="http" type="request"/>
