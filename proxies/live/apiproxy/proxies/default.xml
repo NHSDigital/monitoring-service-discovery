@@ -56,6 +56,7 @@
       <Response />
       <Condition>(proxy.pathsuffix MatchesPath "/service") and (request.verb = "POST")</Condition>
     </Flow>
+
     <Flow name="DELETE service monitoring endpoints">
       <Request>
         <Step>
