@@ -45,5 +45,4 @@ apigee:
         quotaInterval: '1'
         quotaTimeUnit: minute
     specs: []
-    api_catalog: []
 {% endfor %}
