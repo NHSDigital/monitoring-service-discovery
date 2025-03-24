@@ -10,12 +10,11 @@
   "author": "NHS Digital",
   "license": "MIT",
   "homepage": "https://github.com/NHSDigital/monitoring-service-discovery-api",
-  "dependencies": {
-  },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.1",
     "apigeetool": "^0.16.5",
     "license-checker": "^25.0.1",
-    "minimist": "^1.2.6"
+    "minimist": "^1.2.6",
+    "postcss": "^8.5.3"
   }
 }
