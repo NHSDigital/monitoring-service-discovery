@@ -33,7 +33,11 @@ extends:
     service_base_path: ${{ variables.service_base_path }}
     apigee_deployments:
       - environment: internal-dev
+      - environment: dev
+        service_name: "${{ variables.service_name }}-dep"
+        short_service_name: "${{ variables.short_service_name }}-dep"
+        service_base_path: "${{ variables.service_base_path }}-dep"
       - environment: prod
         depends_on:
           - internal_dev
-      
+
