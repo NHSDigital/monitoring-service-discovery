@@ -28,12 +28,13 @@ extends:
   template: azure/common/apigee-deployment.yml@common
   parameters:
     enable_status_monitoring: false
-    service_name: ${{ variables.service_name }}
-    short_service_name: ${{ variables.short_service_name }}
-    service_base_path: ${{ variables.service_base_path }}
+    service_name: ${{ if eq(parameters.environment, 'dev') }}${{ variables.service_name }}-dep${{ else }}${{ variables.service_name }}${{ end }}
+    short_service_name: ${{ if eq(parameters.environment, 'dev') }}${{ variables.short_service_name }}-dep${{ else }}${{ variables.short_service_name }}${{ end }}
+    service_base_path: ${{ if eq(parameters.environment, 'dev') }}${{ variables.service_base_path }}-dep${{ else }}${{ variables.service_base_path }}${{ end }}
     apigee_deployments:
       - environment: internal-dev
+      - environment: dev
       - environment: prod
         depends_on:
           - internal_dev
-      
+
