@@ -13,7 +13,7 @@ install-hooks:
 
 lint:
 	npm run lint
-	poetry run flake8 .
+	poetry run flake8 **/*.py
 
 clean:
 	rm -rf build
