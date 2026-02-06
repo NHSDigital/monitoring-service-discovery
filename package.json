@@ -15,5 +15,10 @@
     "apigeetool": "^0.16.5",
     "license-checker": "^25.0.1",
     "minimist": "^1.2.6"
+  },
+  "dependencies": {
+    "@hapi/hoek": "^9.0.3",
+    "form-data": "^2.5.4",
+    "hoek": "^6.1.3"
   }
 }
